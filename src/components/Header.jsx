@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
 import { AuthContext } from "../utils/AuthContext";
 import { ThemeContext } from "../utils/ThemeContext"; // Ensure correct import
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { isLoggedIn, logout } = useContext(AuthContext);
@@ -13,6 +14,15 @@ const Header = () => {
     logout();
     navigate("/");
   };
+
+  // subscribing cart slice to get data
+  const cartItems = useSelector((store) => store.cart.cartItems);
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  console.log("cart items ", totalItems);
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md transition">
@@ -45,9 +55,9 @@ const Header = () => {
             </Link>
             <Link
               to="/cart"
-              className="text-gray-700 dark:text-gray-200 hover:text-blue-500"
+              className="font-bold text-gray-700 dark:text-gray-200 hover:text-blue-500"
             >
-              Cart
+              Cart - ({totalItems}) items
             </Link>
           </div>
 
