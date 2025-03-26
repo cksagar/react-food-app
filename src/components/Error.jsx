@@ -1,16 +1,15 @@
-import { useRouteError } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Error = () => {
-  const error = useRouteError();
-  console.log(error);
+  const location = useLocation(); // Get the current URL
 
   return (
-    <div>
-      <h1>Page not found</h1>
-      <h2>
-        {error.status}: {error.statusText}
-      </h2>
-      <h3>{error.error.message}</h3>
+    <div className="text-center mt-10">
+      <h1 className="text-3xl font-bold text-red-600">404 - Page Not Found</h1>
+      <p className="text-gray-700 mt-4">
+        The page <span className="font-bold">{location.pathname}</span> does not
+        exist.
+      </p>
     </div>
   );
 };

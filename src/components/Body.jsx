@@ -5,6 +5,7 @@ import RestaurantCard, {
 } from "./feature/restaurant/RestaurantCard";
 import RestaurantFilter from "./feature/restaurant/RestaurantFilter";
 import { BASE_URL, API_URLS } from "../utils/constants";
+import { AuthContext } from "./../utils/AuthContext";
 
 const Body = () => {
   const [restaurantList, setRestaurantsList] = useState([]);

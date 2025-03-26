@@ -7,31 +7,36 @@ import Shimmer from "../../../utils/Shimmer";
 import CategoryItem from "./CategoryItem";
 
 const RestaurantCategory = ({ id }) => {
-  console.log("id in catefory", id);
+  console.log("id", id);
 
   const [categoriesData, setCategoriesData] = useState([]);
   const [toggleAccordian, setToggleAccordian] = useState(null);
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(BASE_URL + API_URLS.CATEGORIES_URL);
+
+        // Ensure correct path to categories
+        const regularCards =
+          response?.data?.data?.cards[4]?.groupedCard?.cardGroupMap?.["REGULAR"]
+            ?.cards || [];
+
+        // Filter valid category cards
+        const filterDataForCategories = regularCards.filter(
+          (item) =>
+            item?.card?.card?.["@type"] ===
+            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+
+        setCategoriesData(filterDataForCategories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
     fetchCategories();
-  }, []);
-
-  const fetchCategories = async () => {
-    const response = await axios(BASE_URL + API_URLS.CATEGORIES_URL);
-
-    // Ensure correct path to categories
-    const regularCards =
-      response?.data?.data?.cards[4]?.groupedCard?.cardGroupMap?.["REGULAR"]
-        ?.cards || [];
-
-    // Filter valid category cards
-    const filterDataForCategories = regularCards.filter(
-      (item) =>
-        item?.card?.card?.["@type"] ==
-        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-    );
-    setCategoriesData(filterDataForCategories);
-  };
+  }, []); // Include `id` if it's dynamic
 
   if (categoriesData.length == 0) {
     return <Shimmer />;
@@ -47,7 +52,7 @@ const RestaurantCategory = ({ id }) => {
         }
       >
         <span className="font-bold text-lg">
-          {category.card.card.title} ({categoriesData.length})
+          {category.card.card.title} ({category.card.card.itemCards.length})
         </span>
         {toggleAccordian === index ? (
           <ChevronUpIcon className="w-6 h-6 text-gray-600" />
@@ -59,7 +64,7 @@ const RestaurantCategory = ({ id }) => {
       {toggleAccordian === index && (
         <div className="bg-green-100 w-9/12 justify-between p-4 mx-auto">
           {category.card.card.itemCards.map((item) => (
-            <CategoryItem item={item} />
+            <CategoryItem key={item.card.info.id} item={item} />
           ))}
         </div>
       )}

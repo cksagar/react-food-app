@@ -1,30 +1,16 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
+import { AuthContext } from "../utils/AuthContext";
+import { ThemeContext } from "../utils/ThemeContext"; // Ensure correct import
 
 const Header = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-
-  const [isLogin, setLogin] = useState(true);
-
+  const { isLoggedIn, logout } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
-  // Apply dark mode class to the <html> tag
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
   const handleLogout = () => {
-    setLogin(false);
-    localStorage.setItem("isLoggedIn", "false");
+    logout();
     navigate("/");
   };
 
@@ -32,14 +18,12 @@ const Header = () => {
     <nav className="bg-white dark:bg-gray-900 shadow-md transition">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div>
             <Link to="/">
               <img className="w-12" src={LOGO_URL} alt="Logo" />
             </Link>
           </div>
 
-          {/* Navigation Links */}
           <div className="hidden md:flex space-x-6">
             <Link
               to="/home"
@@ -67,20 +51,21 @@ const Header = () => {
             </Link>
           </div>
 
-          <div hidden={isLogin}>
-            {/* Login Button */}
+          <div className="flex items-center space-x-4">
+            {isLoggedIn && (
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 px-4 py-2 rounded hover:bg-red-600 text-white"
+              >
+                Logout
+              </button>
+            )}
+
             <button
-              className="m-3 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-              onClick={() => handleLogout()}
-            >
-              Logout
-            </button>
-            {/* Dark Mode Toggle */}
-            <button
+              onClick={toggleTheme}
               className="px-4 py-2 bg-blue-500 dark:bg-gray-700 text-white rounded-lg transition-all duration-300"
-              onClick={() => setDarkMode(!darkMode)}
             >
-              {darkMode ? "🌞 Light Mode" : "🌙 Dark Mode"}
+              {theme === "dark" ? "🌞 Light Mode" : "🌙 Dark Mode"}
             </button>
           </div>
         </div>

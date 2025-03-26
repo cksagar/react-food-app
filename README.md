@@ -20,3 +20,12 @@ json-server --watch db.json --port 5000
 # Fetch API from your React app:
 
 http://localhost:5000/restaurants
+
+# redux
+
+install react redux, @reduxjs/toolkit
+build store and connect to app
+create a slicefor feature
+create action and dispatch
+create reducer and store data
+call use selector and fetch data
