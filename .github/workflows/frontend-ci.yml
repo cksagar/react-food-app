@@ -1,0 +1,42 @@
+name: Frontend CI - React App
+
+on:
+  push:
+    paths:
+      - "client/**"
+    branches:
+      - master
+      - main
+  pull_request:
+    paths:
+      - "client/**"
+
+jobs:
+  build:
+    name: Build & Lint React App
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: 🧾 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🧹 Run Linter
+        run: npm run lint
+
+      - name: ✅ Run Tests
+        run: npm test -- --watchAll=false
+
+      - name: 🏗️ Build App
+        run: npm run build
