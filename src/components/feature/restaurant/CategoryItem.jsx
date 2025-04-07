@@ -30,7 +30,7 @@ const CategoryItem = ({ item }) => {
       </div>
 
       {/* Right Section (Cart Controls) */}
-      <div className="w-4/12 flex items-center justify-end space-x-2 bg-white border border-gray-300 rounded-lg px-2 py-1 shadow-md">
+      <div className="w-3/12 flex items-center justify-center bg-white border border-gray-300 rounded-lg px-2 py-1 shadow-md">
         <button
           onClick={removeItemsFromCart}
           className="cursor-pointer px-3 py-1 bg-red-400 text-white rounded-md text-lg font-bold hover:bg-red-600"

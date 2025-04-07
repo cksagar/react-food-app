@@ -12,8 +12,8 @@ const RestaurantFilter = ({ restaurantList, onFilterToggle }) => {
   return (
     <div className="flex items-center">
       <button
-        className={`px-4 py-2 w-52 rounded-lg transition-colors duration-300 ${
-          isFiltered ? "bg-green-400" : "bg-green-100"
+        className={`px-4 py-2 w-52 rounded-lg transition-colors duration-300 cursor-pointer ${
+          isFiltered ? "bg-green-500" : "bg-green-300"
         }`}
         onClick={handleClick}
       >
