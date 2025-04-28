@@ -2,23 +2,15 @@ name: Frontend CI - React App
 
 on:
   push:
-    paths:
-      - "client/**"
     branches:
       - master
       - main
   pull_request:
-    paths:
-      - "client/**"
 
 jobs:
   build:
     name: Build & Lint React App
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./client
 
     steps:
       - name: 🧾 Checkout Code
