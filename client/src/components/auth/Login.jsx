@@ -1,24 +1,34 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "./../utils/AuthContext";
-import { UserDetailsContext } from "../utils/UserDetailsContext";
+import { UserDetailsContext } from "../../utils/UserDetailsContext";
+import AuthService from "./service/auth.service"; // ✅ import your AuthService
 
 const LoginPage = () => {
-  const { login } = useContext(AuthContext);
   const { setUserName } = useContext(UserDetailsContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (username != "" && password != "") {
-      setUserName(username);
-      login(); // Calls the login function from context
+    setError("");
+
+    if (!username || !password) {
+      setError("Username and password are required");
+      return;
+    }
+
+    try {
+      // ✅ Call login from AuthService
+      const data = await AuthService.login(username, password);
+
+      // ✅ Assuming response: { message: "...", data: { email, id } }
+      setUserName(data.data); // update context
       navigate("/home");
-    } else {
-      setError("Invalid username or password");
+    } catch (err) {
+      console.error("Login failed", err);
+      setError(err?.response?.data?.message || err.message || "Login failed");
     }
   };
 
@@ -26,11 +36,11 @@ const LoginPage = () => {
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center mb-2">{error}</p>}
         <form onSubmit={handleLogin} className="flex flex-col">
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Email"
             className="border p-2 mb-3 rounded"
             value={username}
             onChange={(e) => setUsername(e.target.value)}

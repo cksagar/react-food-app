@@ -14,7 +14,6 @@ server/node_modules/
 # Build outputs
 client/dist/
 client/dist-ssr/
-server/dist/
 
 # Env files
 *.local
@@ -23,7 +22,6 @@ server/dist/
 # Test coverage
 coverage/
 client/coverage/
-server/coverage/
 
 # IDE/Editor settings
 .vscode/

@@ -9,11 +9,12 @@ import Contact from "./components/Contact";
 import Cart from "./components/feature/cart/Cart";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/feature/restaurant/RestaurantMenu";
-import LoginPage from "./components/Login";
 import { AuthProvider } from "./utils/AuthProvider";
 import { UserDetailsProvider } from "./utils/UserDetailsProvider";
 import { appStore } from "./store/appStore";
 import YoutubeMain from "./youtube/components/YoutubeMain";
+import LoginPage from "./components/auth/Login";
+import SignUpPage from "./components/auth/Signup";
 // Lazy loading for About page
 const About = lazy(() => import("./components/About"));
 
@@ -28,6 +29,7 @@ const App = () => {
             <div className="flex-grow p-4">
               <Routes>
                 <Route path="/" element={<LoginPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/home" element={<Body />} />
                 <Route
                   path="/about"
