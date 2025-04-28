@@ -36,3 +36,4 @@ client/coverage/
 
 # Misc
 *.lock
+node_modules
