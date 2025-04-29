@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import RestaurantCard from "./feature/restaurant/RestaurantCard";
 import promotedRestaurantcard from "./feature/restaurant/promotedRestaurantCard";
 import RestaurantFilter from "./feature/restaurant/RestaurantFilter";
-import { BASE_URL, API_URLS } from "../utils/constants";
+import { BASE_URL, FEATURE_API_URLS } from "../utils/constants";
 
 const Body = () => {
   const [restaurantList, setRestaurantsList] = useState([]);
@@ -17,7 +17,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async function getData() {
-    const data = await fetch(BASE_URL + API_URLS.RESTAURANTS_URL);
+    const data = await fetch(BASE_URL + FEATURE_API_URLS.RESTAURANTS_URL);
     const restaurants = await data.json();
     setRestaurantsList(restaurants);
     setFilteredRestaurants(restaurants);

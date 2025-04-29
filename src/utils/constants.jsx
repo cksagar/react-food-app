@@ -5,7 +5,7 @@ export const BASE_URL = "https://nest-demo-mgvs.onrender.com/api/v1";
 
 export const LOCAL_BASE_URL = "http://localhost:3000/api/v1";
 
-export const API_URLS = {
+export const FEATURE_API_URLS = {
   RESTAURANTS_URL: "/restaurant",
   CATEGORIES_URL: "/categories",
 };

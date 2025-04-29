@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 
-import { BASE_URL, API_URLS } from "../../../utils/constants";
+import { BASE_URL, FEATURE_API_URLS } from "../../../utils/constants";
 import Shimmer from "../../../utils/Shimmer";
 import CategoryItem from "./CategoryItem";
 
@@ -15,7 +15,9 @@ const RestaurantCategory = ({ id }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(BASE_URL + API_URLS.CATEGORIES_URL);
+        const response = await axios.get(
+          BASE_URL + FEATURE_API_URLS.CATEGORIES_URL
+        );
 
         // Ensure correct path to categories
         const regularCards =

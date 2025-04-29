@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BASE_URL, API_URLS } from "./constants";
+import { BASE_URL, FEATURE_API_URLS } from "./constants";
 import axios from "axios";
 
 const useRestaurantMenu = (id) => {
@@ -11,7 +11,9 @@ const useRestaurantMenu = (id) => {
   }, []);
 
   const fetchData = async () => {
-    const data = await axios(BASE_URL + API_URLS.RESTAURANTS_URL + `/${id}`);
+    const data = await axios(
+      BASE_URL + FEATURE_API_URLS.RESTAURANTS_URL + `/${id}`
+    );
     setResInfo(data.data);
   };
   return resInfo;

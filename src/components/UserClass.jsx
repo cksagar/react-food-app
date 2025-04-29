@@ -1,5 +1,5 @@
 import React from "react";
-import { BASE_URL, API_URLS } from "../utils/constants";
+import { BASE_URL, FEATURE_API_URLS } from "../utils/constants";
 
 class User extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class User extends React.Component {
 
   fetchData = async () => {
     try {
-      const response = await fetch(BASE_URL + API_URLS.RESTAURANTS_URL);
+      const response = await fetch(BASE_URL + FEATURE_API_URLS.RESTAURANTS_URL);
       const restaurants = await response.json();
       console.log(restaurants);
       this.setState({ restaurants });

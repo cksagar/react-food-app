@@ -15,6 +15,8 @@ import { appStore } from "./store/appStore";
 import YoutubeMain from "./youtube/components/YoutubeMain";
 import LoginPage from "./components/auth/Login";
 import SignUpPage from "./components/auth/Signup";
+import BikeSearchPage from "./components/feature/bike/BikeSearchPage";
+import BikeDetailsPage from "./components/feature/bike/BikeDetailsPage";
 // Lazy loading for About page
 const About = lazy(() => import("./components/About"));
 
@@ -41,6 +43,8 @@ const App = () => {
                 />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/bike" element={<BikeSearchPage />} />
+                <Route path="/bike-details" element={<BikeDetailsPage />} />
                 <Route path="/youtube" element={<YoutubeMain />} />
                 <Route path="/restaurant/:id" element={<RestaurantMenu />} />
                 <Route path="*" element={<Error />} />
