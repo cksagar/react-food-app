@@ -1,7 +1,8 @@
 import axios from "axios";
-import { LOCAL_BASE_URL } from "../../../utils/constants";
+import { BASE_URL } from "../../../utils/constants";
 
-const API_URL = `${LOCAL_BASE_URL}/auth/`; // ✅ Fixed quotes
+const API_URL = `${BASE_URL}/auth/`; // ✅ Fixed quotes
+console.log("BASE_URL =", import.meta.env.VITE_BASE_URL);
 
 const axiosInstance = axios.create({
   baseURL: API_URL,

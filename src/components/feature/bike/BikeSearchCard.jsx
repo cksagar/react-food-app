@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BikeSearchCard = () => {
@@ -6,7 +6,31 @@ const BikeSearchCard = () => {
   const [searchBy, setSearchBy] = useState("brand");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
+  const [brands, setBrands] = useState([]);
+  const [models, setModels] = useState([]);
   const navigate = useNavigate();
+
+  // Fetch Brands and Models from API
+  useEffect(() => {
+    // Simulate fetching data for brands
+    const fetchBrands = async () => {
+      // Replace with your API call for fetching brands
+      const brandResponse = await fetch("https://api.example.com/brands");
+      const brandData = await brandResponse.json();
+      setBrands(brandData);
+    };
+
+    // Simulate fetching data for models (e.g., by brand)
+    const fetchModels = async () => {
+      // Replace with your API call for fetching models
+      const modelResponse = await fetch("https://api.example.com/models");
+      const modelData = await modelResponse.json();
+      setModels(modelData);
+    };
+
+    fetchBrands();
+    fetchModels();
+  }, []); // Empty dependency array means it runs once when the component mounts
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -91,9 +115,11 @@ const BikeSearchCard = () => {
           onChange={(e) => setSelectedBrand(e.target.value)}
         >
           <option value="">Select Brand</option>
-          <option value="Honda">Honda</option>
-          <option value="Yamaha">Yamaha</option>
-          <option value="Bajaj">Bajaj</option>
+          {brands.map((brand) => (
+            <option key={brand.id} value={brand.name}>
+              {brand.name}
+            </option>
+          ))}
         </select>
 
         <select
@@ -102,9 +128,11 @@ const BikeSearchCard = () => {
           onChange={(e) => setSelectedModel(e.target.value)}
         >
           <option value="">Select Model</option>
-          <option value="CBR">CBR</option>
-          <option value="FZ">FZ</option>
-          <option value="Pulsar">Pulsar</option>
+          {models.map((model) => (
+            <option key={model.id} value={model.name}>
+              {model.name}
+            </option>
+          ))}
         </select>
       </div>
 

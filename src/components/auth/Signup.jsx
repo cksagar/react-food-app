@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LOCAL_BASE_URL } from "../../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +18,9 @@ const SignUpPage = () => {
     }
 
     try {
-      const response = await fetch(`${LOCAL_BASE_URL}+/auth/signup`, {
+      console.log("BASE_URL", BASE_URL);
+
+      const response = await fetch(`${BASE_URL}+/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
