@@ -17,7 +17,7 @@ import LoginPage from "./components/auth/Login";
 import SignUpPage from "./components/auth/Signup";
 import BikeSearchPage from "./components/feature/bike/BikeSearchPage";
 import BikeDetailsPage from "./components/feature/bike/BikeDetailsPage";
-import PDFGenerator from "./components/PDFGenerator";
+import Upload from "./components/feature/upload/Upload";
 // Lazy loading for About page
 const About = lazy(() => import("./components/About"));
 
@@ -48,7 +48,7 @@ const App = () => {
                 <Route path="/bike-details" element={<BikeDetailsPage />} />
                 <Route path="/youtube" element={<YoutubeMain />} />
                 <Route path="/restaurant/:id" element={<RestaurantMenu />} />
-                <Route path="/pdf-generator" element={<PDFGenerator />} />
+                <Route path="/upload" element={<Upload />} />
                 <Route path="*" element={<Error />} />
               </Routes>
             </div>
